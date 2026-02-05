@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Color System */
+  --color-white: #FFFFFF;
+  --color-dark: #161718;
+  --color-primary: #3AB7A5;
+  --color-secondary: #003A63;
+  --color-accent: #0064AD;
+  --color-navy: #1F1F3B;
+  --color-light-blue: #C8E7FF;
+  --color-pale-blue: #E3F3FF;
+  
+  /* Semantic Colors */
+  --background: var(--color-pale-blue);
+  --foreground: var(--color-navy);
+  --background-dark: var(--color-navy);
+  --text-primary: var(--color-navy);
+  --text-secondary: var(--color-secondary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #3AB7A5;
+  --color-secondary: #003A63;
+  --color-accent: #0064AD;
+  --font-sans: var(--font-urbanist);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--color-pale-blue);
+    --foreground: var(--color-navy);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Urbanist, Arial, Helvetica, sans-serif;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: Urbanist, Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1;
+}
+
+h1 {
+  font-size: clamp(3rem, 5vw + 1rem, 8rem);
+}
+
+h2 {
+  font-size: clamp(2.5rem, 4vw + 1rem, 6rem);
+}
+
+h3 {
+  font-size: clamp(2rem, 3vw + 1rem, 4.5rem);
+}
+
+h4 {
+  font-size: clamp(1.75rem, 2.5vw + 0.5rem, 3.5rem);
+}
+
+h5 {
+  font-size: clamp(1.5rem, 2vw + 0.5rem, 2.75rem);
+}
+
+h6 {
+  font-size: clamp(1.25rem, 1.5vw + 0.5rem, 2rem);
+}
+
+p {
+  font-family: Urbanist, Arial, Helvetica, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.2;
+  max-width: 28rem;
+}
+
+.caption {
+  font-family: Urbanist, Arial, Helvetica, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.button-text {
+  font-family: Urbanist, Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
 }
