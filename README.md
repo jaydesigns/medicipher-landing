@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MEDICIPHER Landing Page
+
+A modern, animated landing page for MEDICIPHER - revolutionizing skilled nursing billing and medical documentation workflow with AI-powered software solutions.
+
+## Overview
+
+This is a Next.js landing page featuring smooth scroll animations powered by GSAP, showcasing MEDICIPHER's comprehensive suite of solutions for skilled nursing facilities.
+
+## Tech Stack
+
+- **Framework:** [Next.js 16](https://nextjs.org) with App Router
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com)
+- **Animations:** [GSAP](https://greensock.com/gsap/) with React integration
+- **Language:** TypeScript
+- **React:** v19
+
+## Project Structure
+
+```
+app/
+├── _components/
+│   ├── Button.tsx          # Reusable button component
+│   ├── Navigation.tsx      # Navigation bar
+│   ├── ScrollSmoother.tsx  # GSAP scroll smoothing wrapper
+│   └── _sections/
+│       ├── Hero.tsx        # Hero section with animated imagery
+│       └── Features.tsx    # Features showcase section
+├── _symbols/
+│   └── Logomark.tsx        # MEDICIPHER logo component
+├── globals.css             # Global styles
+├── layout.tsx              # Root layout
+└── page.tsx                # Main landing page
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:9280](http://localhost:9280) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The page auto-updates as you edit files. Start by modifying [app/page.tsx](app/page.tsx).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Build
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Production
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Key Features
 
-## Deploy on Vercel
+- **Smooth Scroll Animations:** GSAP-powered animations for engaging user experience
+- **Responsive Design:** Fully responsive layout built with Tailwind CSS
+- **Modern UI:** Clean, professional interface showcasing MEDICIPHER's value proposition
+- **Performance Optimized:** Next.js App Router for optimal loading and SEO
+- **TypeScript:** Type-safe development for maintainability
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Private project for MEDICIPHER.
