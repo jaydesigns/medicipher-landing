@@ -23,7 +23,7 @@ export default function HeroSection(){
                 </div>
             </div>
             <div className="heroImage absolute inset-0 -z-10" style={{clipPath:'inset(20% 20% 20% 20%)'}}>
-                <Image src={`https://res.cloudinary.com/df9xjyhfb/image/upload/v1770177765/skilled-nursing-facility-photo_rnm6pp.png`} alt="Skilled nursing facility" fill className="absolute object-cover inset-0" sizes="100vw" placeholder="blur" blurDataURL={`${BLUR_DATA_URL}`} />
+                <Image src={`https://res.cloudinary.com/df9xjyhfb/image/upload/v1770177765/skilled-nursing-facility-photo_rnm6pp.png`} alt="Skilled nursing facility" fill className="absolute object-cover inset-0" sizes="100vw" quality={100} placeholder="blur" blurDataURL={`${BLUR_DATA_URL}`} />
             </div>
         </section>
     )

@@ -21,6 +21,7 @@ export default function ScrollSmootherWrapper({ children }: ScrollSmootherProps)
       smooth: 1.5,
       effects: true,
       smoothTouch: 0.1,
+      ease: (x:number) => {return 1 - (1 - x) * (1 - x)},
     });
 
     return () => {

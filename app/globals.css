@@ -15,6 +15,10 @@
   --background: var(--color-pale-blue);
   --foreground: var(--color-navy);
   --background-dark: var(--color-navy);
+  --background-light-blue: var(--color-light-blue);
+  --background-pale-blue: var(--color-pale-blue);
+  --background-primary: var(--color-primary);
+  --background-accent: var(--color-accent);
   --text-primary: var(--color-navy);
   --text-secondary: var(--color-secondary);
 }
@@ -22,9 +26,14 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: #3AB7A5;
-  --color-secondary: #003A63;
-  --color-accent: #0064AD;
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-light-blue: var(--color-light-blue);
+  --color-pale-blue: var(--color-pale-blue);
+  --color-background-light-blue: var(--background-light-blue);
+  --color-background-pale-blue: var(--background-pale-blue);
+  --color-background-accent: var(--background-accent);
   --font-sans: var(--font-urbanist);
 }
 
