@@ -1,5 +1,5 @@
-export default function Button({children}:{children:React.ReactNode}){
+export default function Button({children,className}:{children:React.ReactNode, className:string}){
     return(
-        <button className="px-6 py-2 font-medium bg-accent rounded-full text-white"><h6>{children}</h6></button>
+        <button className={`${className} px-6 py-2 font-medium button-text bg-accent rounded-full text-white`}><span>{children}</span></button>
     )
 }

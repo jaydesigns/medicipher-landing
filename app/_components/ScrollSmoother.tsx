@@ -19,7 +19,7 @@ export default function ScrollSmootherWrapper({ children }: ScrollSmootherProps)
       wrapper: '#smooth-wrapper',
       content: '#smooth-content',
       smooth: 1.5,
-      effects: true,
+      // effects: true,
       smoothTouch: 0.1,
       ease: (x:number) => {return 1 - (1 - x) * (1 - x)},
     });

@@ -8,23 +8,25 @@ export const BLUR_DATA_URL = `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD
 export default function HeroSection(){
 
     useGSAP(() => {
-        gsap.fromTo('.heroImage',{clipPath:'inset(20% 20% 20% 20%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1,ease:'sine.inOut'})
+        gsap.fromTo('.heroImage',{clipPath:'inset(25% 25% 25% 25%)'},{clipPath:'inset(0% 0% 0% 0%)',delay:1.5,duration:1,ease:'sine.inOut'})
+        gsap.fromTo('.bottomBlur',{translateY:'50%'},{translateY:0,filter:'blur(50px)',scrollTrigger:{trigger:'.heroContainer',scrub:true,start:'top top',end:'bottom 80%'}})
     },{dependencies:[]})
 
     return(
-        <section className="relative flex flex-col justify-start w-full h-screen p-6 pt-24">
+        <section className="heroContainer relative flex flex-col justify-start w-full h-screen p-6 pt-24">
             <div className="flex flex-col gap-8">
-                <h1 className="flex">Building Profitable Facilities</h1>
-                <p>MEDICIPHER is revolutionizing skilled nursing billing and medical documentation workflow with our comprehensive suite of AI-powered software solutions</p>
-                <p>Schedule your free consultation today.</p>
+                <h1 className="flex fade">Building Profitable Facilities</h1>
+                <p className="fade">MEDICIPHER is revolutionizing skilled nursing billing and medical documentation workflow with our comprehensive suite of AI-powered software solutions</p>
+                <p className="fade">Schedule your free consultation today.</p>
                 <div className="flex gap-12">
-                    <Button>Schedule a Demo</Button>
-                    <Button>Contact Us</Button>
+                    <Button className='fade'>Schedule a Demo</Button>
+                    <Button className='fade'>Contact Us</Button>
                 </div>
             </div>
-            <div className="heroImage absolute inset-0 -z-10" style={{clipPath:'inset(20% 20% 20% 20%)'}}>
-                <Image src={`https://res.cloudinary.com/df9xjyhfb/image/upload/v1770177765/skilled-nursing-facility-photo_rnm6pp.png`} alt="Skilled nursing facility" fill className="absolute object-cover inset-0" sizes="100vw" quality={100} placeholder="blur" blurDataURL={`${BLUR_DATA_URL}`} />
+            <div className="heroImage absolute inset-0 -z-10" style={{clipPath:'inset(25% 25% 25% 25%)'}}>
+                <Image src={`https://res.cloudinary.com/df9xjyhfb/image/upload/v1770177765/skilled-nursing-facility-photo_rnm6pp.png`} alt="Skilled nursing facility" fill className="absolute object-cover inset-0" sizes="100vh" quality={100} placeholder="blur" blurDataURL={`${BLUR_DATA_URL}`} />
             </div>
+            <div className="absolute -bottom-20 -left-20 -right-20 blur-[20px] h-96 bg-pale-blue bottomBlur"></div>
         </section>
     )
 }
