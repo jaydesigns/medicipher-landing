@@ -9,9 +9,8 @@ import ScrollSmootherWrapper from "./_components/ScrollSmoother";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen w-full max-w-screen flex-col">
+    <main className="flex min-h-screen w-full max-w-screen flex-col overscroll-none">
       <ScrollSmootherWrapper>
-        <Navigation />
         <HeroSection />
         <Features />
         <ShowcaseSection />
@@ -19,6 +18,7 @@ export default function Home() {
         <CTASection />
         <FooterSection />
       </ScrollSmootherWrapper>
+      <Navigation />
     </main>
   );
 }
