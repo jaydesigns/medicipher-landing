@@ -6,13 +6,17 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useState, useEffect, useRef } from "react";
+import 'material-symbols'
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Navigation(){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const navRef = useRef<HTMLElement>(null);
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
     const lastScrollY = useRef(0);
+    const navRef = useRef<HTMLElement>(null);
+    const mobileMenuRef = useRef<HTMLDivElement>(null);
+    const closedNavHeight = useRef(0);
 
     useGSAP(() => {
         gsap.fromTo('.fade',{filter:'blur(10px)',opacity:0},{filter:'blur(0px)',opacity:1,translateY:0,delay:2,duration:0.7,ease:'sine.out',stagger:0.1})
@@ -67,9 +71,79 @@ export default function Navigation(){
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('mousemove', handleMouseMove);
         };
-    })
+    }, {dependencies: []})
+
+    useGSAP(() => {
+        if (window.innerWidth >= 768 || !isMenuVisible) {
+            return;
+        }
+
+        const nav = navRef.current;
+        const mobileMenu = mobileMenuRef.current;
+
+        if (!nav || !mobileMenu) {
+            return;
+        }
+
+        const openHeight = mobileMenu.getBoundingClientRect().height + 20;
+        const currentNavHeight = nav.getBoundingClientRect().height;
+
+        const tl = gsap.timeline();
+
+        if (isMenuOpen) {
+            tl.set(nav, { overflow: 'hidden' })
+                .fromTo(
+                    nav,
+                    { height: closedNavHeight.current || currentNavHeight },
+                    { height: openHeight, duration: 0.45, ease: 'power2.out' }
+                )
+                .fromTo(
+                    '.mobileMenuText',
+                    { opacity: 0, filter: 'blur(10px)', y: 8 },
+                    { opacity: 1, filter: 'blur(0px)', y: 0, duration: 0.5, ease: 'sine.out', stagger: 0.1 },
+                    0.1
+                )
+                .set(nav, { height: 'auto' });
+        } else {
+            tl.set(nav, { overflow: 'hidden', height: currentNavHeight })
+                .to(
+                    '.mobileMenuText',
+                    {
+                        opacity: 0,
+                        filter: 'blur(10px)',
+                        y: 8,
+                        duration: 0.25,
+                        ease: 'sine.inOut',
+                        stagger: { each: 0.05, from: 'end' }
+                    }
+                )
+                .to(
+                    nav,
+                    {
+                        height: closedNavHeight.current || currentNavHeight,
+                        duration: 0.35,
+                        ease: 'power2.inOut',
+                        onComplete: () => {
+                            setIsMenuVisible(false);
+                            requestAnimationFrame(() => {
+                                gsap.set(nav, { clearProps: 'overflow,height' });
+                            });
+                        }
+                    },
+                    0.05
+                );
+        }
+
+        return () => {
+            tl.kill();
+        };
+    }, { dependencies: [isMenuOpen, isMenuVisible], scope: navRef })
 
     const toggleMenu = () => {
+        if (!isMenuOpen && navRef.current) {
+            closedNavHeight.current = navRef.current.getBoundingClientRect().height;
+            setIsMenuVisible(true);
+        }
         setIsMenuOpen(!isMenuOpen);
     };
 
@@ -77,14 +151,24 @@ export default function Navigation(){
         setIsMenuOpen(false);
     };
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setIsMenuOpen(false);
+                setIsMenuVisible(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return(
         <>
-            <nav className="navBar fade opacity-0 fixed left-1/2 -translate-x-1/2 w-full max-w-270 bottom-6 z-10 px-2 py-1 bg-pale-blue/80 backdrop-blur-md rounded-2xl">
-                <div className="flex items-center justify-between w-full p-2 text-navy">
+            <nav ref={navRef} className="navBar fade opacity-0 fixed left-1/2 -translate-x-1/2 w-[90vw] md:w-full max-w-270 bottom-6 z-10 bg-pale-blue/60 backdrop-blur-[25px] text-navy rounded-[20px] px-5 py-2.5">
+                <div className="hidden md:flex items-center justify-between w-full p-2">
                     <Logomark color={'currentColor'} style={{transform:'scale(0.7) translateX(-20%)'}}/>
-                    
-                    {/* Desktop Menu */}
-                    <ul className="hidden md:flex gap-8">
+                    <ul className="flex gap-8">
                         <li>
                             <Link href={"/"}>
                                 Home
@@ -101,61 +185,61 @@ export default function Navigation(){
                             </Link>
                         </li>
                     </ul>
-                    {/* Hamburger Menu Button */}
-                    <button
-                        onClick={toggleMenu}
-                        className="md:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center z-50"
-                        aria-label="Toggle menu"
-                    >
-                        <span className={`w-6 h-0.5 bg-black transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-                        <span className={`w-6 h-0.5 bg-black transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-                        <span className={`w-6 h-0.5 bg-black transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-                    </button>
+                </div>
+
+                <div className="md:hidden w-full">
+                    {isMenuVisible ? (
+                        <div ref={mobileMenuRef} className="flex h-full min-h-78 flex-col items-end gap-2">
+                            <ul className="flex w-full flex-col items-end gap-1 pt-2">
+                                <li>
+                                    <Link href={'/'} onClick={closeMenu} className="mobileMenuText inline-flex justify-end py-2 text-2xl font-medium tracking-[-0.02em] text-navy leading-[1.2]">
+                                        Home
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={'/'} onClick={closeMenu} className="mobileMenuText inline-flex justify-end py-2 text-2xl font-medium tracking-[-0.02em] text-navy leading-[1.2]">
+                                        About
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={'/'} onClick={closeMenu} className="mobileMenuText inline-flex justify-end py-2 text-2xl font-medium tracking-[-0.02em] text-navy leading-[1.2]">
+                                        Solutions
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={'/'} onClick={closeMenu} className="mobileMenuText inline-flex justify-end py-2 text-2xl font-medium tracking-[-0.02em] text-navy leading-[1.2]">
+                                        Contact
+                                    </Link>
+                                </li>
+                            </ul>
+
+                            <div className="mt-auto flex w-full items-center justify-between pt-2">
+                                <Logomark color={'currentColor'} style={{transform:'scale(0.72)',transformOrigin:'left center'}}/>
+                                <button
+                                    onClick={closeMenu}
+                                    className="relative flex h-8 w-8 items-center justify-center"
+                                    aria-label="Close menu"
+                                    aria-expanded={isMenuOpen}
+                                >
+                                    <span className="material-symbols-rounded rotate-45" >add</span> 
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="flex items-center justify-between">
+                            <Logomark color={'currentColor'} style={{transform:'scale(0.72)',transformOrigin:'left center'}}/>
+                            <button
+                                onClick={toggleMenu}
+                                className="flex h-8.25 w-8.25 flex-col items-center justify-center gap-1.5"
+                                aria-label="Toggle menu"
+                                aria-expanded={isMenuOpen}
+                            >
+                                <span className="material-symbols-rounded">menu</span> 
+                            </button>
+                        </div>
+                    )}
                 </div>
             </nav>
-
-            {/* Mobile Menu Modal */}
-            {isMenuOpen && (
-                <div 
-                    className="md:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
-                    onClick={closeMenu}
-                >
-                    <div 
-                        className="fixed top-0 right-0 h-full w-64 bg-white shadow-2xl p-8 pt-24"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <ul className="flex flex-col gap-6">
-                            <li>
-                                <Link 
-                                    href={"/"}
-                                    onClick={closeMenu}
-                                    className="text-lg font-medium hover:text-gray-600 transition-colors"
-                                >
-                                    Home
-                                </Link>
-                            </li>
-                            <li>
-                                <Link 
-                                    href={"/"}
-                                    onClick={closeMenu}
-                                    className="text-lg font-medium hover:text-gray-600 transition-colors"
-                                >
-                                    About
-                                </Link>
-                            </li>
-                            <li>
-                                <Link 
-                                    href={"/"}
-                                    onClick={closeMenu}
-                                    className="text-lg font-medium hover:text-gray-600 transition-colors"
-                                >
-                                    Contact
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            )}
         </>
     )
 }
