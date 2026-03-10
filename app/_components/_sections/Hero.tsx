@@ -18,20 +18,18 @@ export default function HeroSection(){
     },{dependencies:[]})
 
     return(
-        <section className="heroContainer relative flex flex-col justify-start w-full h-screen p-6">
-            <div className="flex flex-col gap-8">
-                <h1 className="flex fade">Building Profitable Facilities</h1>
-                <p className="fade">MEDICIPHER is revolutionizing skilled nursing billing and medical documentation workflow with our comprehensive suite of AI-powered software solutions</p>
-                <p className="fade">Schedule your free consultation today.</p>
-                <div className="flex gap-12">
-                    <Button className='fade'>Schedule a Demo</Button>
-                    <Button className='fade'>Contact Us</Button>
+        <section className="heroContainer relative flex flex-col justify-end items-center-safe w-full h-screen px-6 py-28">
+            <div className="fade flex items-start gap-8 w-full max-w-270 bg-accent/10 backdrop-blur-2xl rounded-2xl p-4">
+                <h1 className="flex flex-2 fade text-white">Automate Your Reimbursement Lifecycle</h1>
+                <p className="fade flex-2 text-white">Stop the revenue leakage. MediCipher is a comprehensive, AI-powered suite that optimizes reimbursement, automates medical documentation, and defends against audits—shifting your clinical team from data hunters to clinical validators.</p>
+                <div className="flex flex-1 gap-12">
+                    <Button className='fade' style={{backgroundColor:"#0A9D88"}}>Try FREE for a month</Button>
                 </div>
             </div>
             <div className="heroImage absolute inset-0 -z-10" style={{clipPath:'inset(25% 25% 25% 25%)'}}>
                 <Image ref={heroImage} src={`https://res.cloudinary.com/df9xjyhfb/image/upload/v1770177765/skilled-nursing-facility-photo_rnm6pp.png`} alt="Skilled nursing facility" fill className="absolute object-cover inset-0" sizes="100vh" quality={100} placeholder="blur" blurDataURL={`${BLUR_DATA_URL}`} />
                 <video ref={heroVideo} className="absolute object-cover inset-0 w-full h-full opacity-0" autoPlay muted playsInline>
-                    <source src="https://res.cloudinary.com/df9xjyhfb/video/upload/v1770177782/uhd_25fps_m5vyqb.mp4" type="video/mp4" />
+                    <source src="https://res.cloudinary.com/df9xjyhfb/video/upload/v1773166679/medicipher-landing-hero_-_Sequence_01_tw1s5w.mp4" type="video/mp4" />
                 </video>
             </div>
             <div className="absolute -bottom-48 -left-20 -right-20 blur-[20px] h-96 bg-accent bottomBlur"></div>

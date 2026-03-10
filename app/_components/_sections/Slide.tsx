@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Button from "../Button";
+import Image from "next/image";
 
 interface SlideData {
 	image: string;
@@ -106,12 +106,14 @@ export default function SlideSection(){
 								ref={el => {
 									if (el) imgRefs.current[index] = el;
 								}}
-								className="h-full w-full shrink-0"
+								className="relative h-full w-full shrink-0"
 							>
-								<img 
-									alt={slide.title} 
-									className="h-full w-full object-cover"
+								<Image
+									alt={slide.title}
+									className="object-cover"
 									src={slide.image}
+									fill
+									sizes="(min-width: 768px) 50vw, 100vw"
 								/>
 							</div>
 						))}
@@ -145,7 +147,7 @@ export default function SlideSection(){
 					<button
 						key={index}
 						onClick={() => handleSlideChange(index)}
-						className={`rounded-full px-2 md:px-6 py-1 md:py-2 text-xs md:text-base font-semibold tracking-[-0.24px] transition-all duration-300 ${
+						className={`rounded-full px-2 md:px-6 py-1 md:py-2 text-xs md:text-base font-semibold tracking-[-0.24px] transition-all duration-300 cursor-pointer ${
 							currentSlide === index
 								? "bg-light-blue text-black"
 								: "bg-transparent text-[--color-navy] hover:bg-light-blue hover:text-black"

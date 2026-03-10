@@ -12,7 +12,7 @@ export default function Features(){
     },{dependencies:[],scope:featuresContainer})
     return(
         <section ref={featuresContainer} className="featuresContainer relative flex flex-col justify-center items-center w-full h-screen p-6 pt-24">
-            <div className="flex flex-col w-full max-w-270 h-full">
+            <div className="flex flex-col w-full max-w-270 h-5/6">
                 <h2>Features</h2>
                 <div className="grid grid-flow-row md:grid-flow-col grid-cols-6 grid-rows-4 gap-4 h-full w-full">
                     <FeatureCard additionalClass="scrollFade opacity-0 row-span-2 md:row-span-4 col-span-6 md:col-span-2 bg-light-blue">

@@ -10,17 +10,11 @@ const rollingLabels = ['MDS', 'ADR', 'CMI']
 
 type ShowcaseStage = 'idle' | 'processing' | 'parsed';
 
-function ProcessingCopy({ isActive }: { isActive: boolean }) {
+function ProcessingCopy() {
 	const [dots, setDots] = useState(1)
 	const [visibleLines, setVisibleLines] = useState(1)
 
 	useEffect(() => {
-		if (!isActive) {
-			setDots(1)
-			setVisibleLines(1)
-			return
-		}
-
 		const dotsIntervalId = window.setInterval(() => {
 			setDots((prev) => (prev % 3) + 1)
 		}, 350)
@@ -33,7 +27,7 @@ function ProcessingCopy({ isActive }: { isActive: boolean }) {
 			window.clearInterval(dotsIntervalId)
 			window.clearTimeout(nextLineTimeoutId)
 		}
-	}, [isActive])
+	}, [])
 
 	const ellipses = '.'.repeat(dots)
 
@@ -109,18 +103,18 @@ export default function ShowcaseSection(){
 			<div className="flex w-full max-w-400 flex-col gap-8 md:flex-row">
 				<div className="flex w-full flex-col items-start justify-between gap-8 md:w-[36%]">
 					<div className="flex w-full flex-col gap-6 text-white">
-						<h4 className="scrollFade relative z-40 max-w-135 ">
+						<h2 className="scrollFade relative z-40 max-w-135 ">
 							Your <span className="inline-flex items-center"><RollingSelect items={rollingLabels} /></span> Assistant
-						</h4>
-						<h6 className="scrollFade max-w-130 text-[18px] leading-[1.1]  lg:text-2xl">
+						</h2>
+						<h4 className="scrollFade max-w-130 text-[18px] leading-[1.1]  lg:text-2xl">
 							Powerful automation for modern nursing facilities
-						</h6>
+						</h4>
 						<p className="scrollFade max-w-130 text-white/90 ">
-							Clinicians shift from "data hunters" to "clinical validators," instantly verifying every prepopulated data point with a single click and a verifiable citation.
+							Clinicians shift from &quot;data hunters&quot; to &quot;clinical validators&quot;, instantly verifying every prepopulated data point with a single click and a verifiable citation.
 						</p>
 					</div>
-					<div className="scrollFade h-60 w-full overflow-hidden rounded-[40px]  lg:h-82.25">
-						<img alt="" className="h-full w-full object-cover" src={showcasePhoto} />
+					<div className="scrollFade relative h-60 w-full overflow-hidden rounded-[40px]  lg:h-82.25">
+						<Image alt="Nursing facility operations" className="object-cover" src={showcasePhoto} fill sizes="(min-width: 1024px) 33vw, 100vw" />
 					</div>
 				</div>
 				<div className="scrollFade relative flex gap-4 min-h-130 w-full grow items-center justify-center overflow-hidden rounded-[40px] bg-light-blue p-6  lg:min-h-182.5 lg:p-10">
@@ -179,12 +173,14 @@ export default function ShowcaseSection(){
 									</div>
 								</div>
 
-								<div className={`absolute inset-0 w-full transition-opacity bg-white p-4 h-fit rounded-2xl duration-500 ${stage === 'processing' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-									<ProcessingCopy isActive={stage === 'processing'} />
-									<div className="h-1.5 w-full overflow-hidden rounded-full bg-pale-blue">
-										<div className={`h-full rounded-full bg-primary transition-all duration-5200 ease-linear ${stage === 'processing' ? 'w-full' : 'w-0'}`} />
+								{stage === 'processing' ? (
+									<div className="absolute inset-0 w-full transition-opacity bg-white p-4 h-fit rounded-2xl duration-500 opacity-100">
+										<ProcessingCopy />
+										<div className="h-1.5 w-full overflow-hidden rounded-full bg-pale-blue">
+											<div className="h-full w-full rounded-full bg-primary transition-all duration-5200 ease-linear" />
+										</div>
 									</div>
-								</div>
+								) : null}
 							</div>
 					</div>
 				</div>
