@@ -29,7 +29,7 @@ export default function HeroSection(){
             <div className="heroImage absolute inset-0 -z-10" style={{clipPath:'inset(25% 25% 25% 25%)'}}>
                 <Image ref={heroImage} src={`https://res.cloudinary.com/df9xjyhfb/image/upload/v1770177765/skilled-nursing-facility-photo_rnm6pp.png`} alt="Skilled nursing facility" fill className="absolute object-cover inset-0" sizes="100vh" quality={100} placeholder="blur" blurDataURL={`${BLUR_DATA_URL}`} />
                 <video ref={heroVideo} className="absolute object-cover inset-0 w-full h-full opacity-0" autoPlay muted playsInline>
-                    <source src="https://res.cloudinary.com/df9xjyhfb/video/upload/v1773166679/medicipher-landing-hero_-_Sequence_01_tw1s5w.mp4" type="video/mp4" />
+                    <source src="https://res.cloudinary.com/df9xjyhfb/video/upload/v1773170740/Medicipher_landing_woman_using_laptop_bm9mj6.mp4" type="video/mp4" />
                 </video>
             </div>
             <div className="absolute -bottom-48 -left-20 -right-20 blur-[20px] h-96 bg-accent bottomBlur"></div>
