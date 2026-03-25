@@ -18,18 +18,20 @@ export default function HeroSection(){
     },{dependencies:[]})
 
     return(
-        <section className="heroContainer relative flex flex-col justify-end items-center-safe w-full h-screen px-6 py-28">
-            <div className="fade flex items-start gap-8 w-full max-w-270 bg-accent/10 backdrop-blur-2xl rounded-2xl p-4">
+        <section className="heroContainer relative flex flex-col justify-end items-center-safe w-full h-screen px-6 py-24 lg:py-30">
+            <div className="fade flex flex-col items-start gap-2 lg:gap-8 w-full max-w-270 bg-accent/10 backdrop-blur-2xl rounded-2xl p-4">
                 <h1 className="flex flex-2 fade text-white">Automate Your Reimbursement Lifecycle</h1>
-                <p className="fade flex-2 text-white">Stop the revenue leakage. MediCipher is a comprehensive, AI-powered suite that optimizes reimbursement, automates medical documentation, and defends against audits—shifting your clinical team from data hunters to clinical validators.</p>
-                <div className="flex flex-1 gap-12">
-                    <Button className='fade' style={{backgroundColor:"#0A9D88"}}>Try FREE for a month</Button>
+                <div className="flex flex-col lg:flex-row w-full gap-2 lg:justify-between">
+                    <p className="fade flex-1 text-white">Stop the revenue leakage. MediCipher is a comprehensive, AI-powered suite that optimizes reimbursement, automates medical documentation, and defends against audits—shifting your clinical team from data hunters to clinical validators.</p>
+                    <div className="flex flex-1 lg:justify-end-safe">
+                        <Button className='fade' style={{backgroundColor:"#0A9D88"}}>Try FREE for 30 days</Button>
+                    </div>
                 </div>
             </div>
             <div className="heroImage absolute inset-0 -z-10" style={{clipPath:'inset(25% 25% 25% 25%)'}}>
                 <Image ref={heroImage} src={`https://res.cloudinary.com/df9xjyhfb/image/upload/v1770177765/skilled-nursing-facility-photo_rnm6pp.png`} alt="Skilled nursing facility" fill className="absolute object-cover inset-0" sizes="100vh" quality={100} placeholder="blur" blurDataURL={`${BLUR_DATA_URL}`} />
                 <video ref={heroVideo} className="absolute object-cover inset-0 w-full h-full opacity-0" autoPlay muted playsInline>
-                    <source src="https://res.cloudinary.com/df9xjyhfb/video/upload/v1773166679/medicipher-landing-hero_-_Sequence_01_tw1s5w.mp4" type="video/mp4" />
+                    <source src="https://res.cloudinary.com/df9xjyhfb/video/upload/v1773170740/Medicipher_landing_woman_using_laptop_bm9mj6.mp4" type="video/mp4" />
                 </video>
             </div>
             <div className="absolute -bottom-48 -left-20 -right-20 blur-[20px] h-96 bg-accent bottomBlur"></div>

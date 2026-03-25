@@ -106,19 +106,20 @@ export default function ShowcaseSection(){
 						<h2 className="scrollFade relative z-40 max-w-135 ">
 							Your <span className="inline-flex items-center"><RollingSelect items={rollingLabels} /></span> Assistant
 						</h2>
-						<h4 className="scrollFade max-w-130 text-[18px] leading-[1.1]  lg:text-2xl">
+						<h4 className="scrollFade max-w-130 text-[18px] leading-[1.1]  lg:text-2xl z-40">
 							Powerful automation for modern nursing facilities
 						</h4>
-						<p className="scrollFade max-w-130 text-white/90 ">
+						<p className="scrollFade max-w-130 text-white/90 z-40">
 							Clinicians shift from &quot;data hunters&quot; to &quot;clinical validators&quot;, instantly verifying every prepopulated data point with a single click and a verifiable citation.
 						</p>
 					</div>
-					<div className="scrollFade relative h-60 w-full overflow-hidden rounded-[40px]  lg:h-82.25">
+					<div className="scrollFade relative h-60 w-full overflow-hidden rounded-[40px] hidden lg:block lg:h-82.25">
 						<Image alt="Nursing facility operations" className="object-cover" src={showcasePhoto} fill sizes="(min-width: 1024px) 33vw, 100vw" />
 					</div>
 				</div>
 				<div className="scrollFade relative flex gap-4 min-h-130 w-full grow items-center justify-center overflow-hidden rounded-[40px] bg-light-blue p-6  lg:min-h-182.5 lg:p-10">
-					<div className={`uploadContainer absolute inset-0 z-20 flex items-center justify-center px-6 transition-opacity duration-500 ${stage === 'idle' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+					<div className={`uploadContainer absolute inset-0 z-20 flex flex-col gap-12 items-center justify-center px-6 transition-opacity duration-500 ${stage === 'idle' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+						<h4>Click the button to experience how easy it is when using Medicipher</h4>
 						<div
 							onClick={startSimulation}
 							className="group relative h-fit w-full max-w-68.75 cursor-pointer p-1.25 text-left transition-transform duration-300 hover:scale-[1.02]"
@@ -139,7 +140,7 @@ export default function ShowcaseSection(){
 						<div className={`absolute inset-0 transition-opacity duration-500 ${stage === 'idle' ? 'opacity-0' : 'opacity-100'}`}>
 							<Image alt="Sample document" className="h-full w-full" src={sampleDocument} sizes="100vw" fill style={{ position:'absolute', objectFit:'contain' }} />
 						</div>
-						<div className="relative z-10 h-full w-full lg:max-h-160">
+						<div className="relative z-10 h-screen lg:h-full w-full lg:max-h-160">
 							{stage==='parsed'&&<Button onClick={()=>resetStage()} className="absolute right-4 bottom-4 z-50 flex items-center cursor-pointer">
 									<span className="material-symbols-outlined">replay</span>
 									<p>Restart</p>
