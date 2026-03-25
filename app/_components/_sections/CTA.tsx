@@ -99,7 +99,7 @@ export default function CTASection(){
         })
     },{dependencies:[]})
     return(
-        <section ref={ctaSectionRef} className="flex w-full h-60vh flex-col lg:flex-row">
+        <section id="cta-section" ref={ctaSectionRef} className="flex w-full h-60vh flex-col lg:flex-row">
             <div className="flex w-full lg:w-1/2 flex-col justify-start bg-accent px-6 py-10">
                 <span className="cta-title text-4xl md:text-[76px] leading-[1.1] font-semibold text-white lg:text-[96px]">
                     Ready to transform your facility management?

@@ -74,6 +74,7 @@ function RollingSelect({ items }: { items: string[] }) {
 
 export default function ShowcaseSection(){
 	const [ stage, setStage ] = useState<ShowcaseStage>('idle')
+	const [progress, setProgress] = useState(0)
 
 	useEffect(() => {
 		if (stage !== 'processing') {
@@ -91,11 +92,15 @@ export default function ShowcaseSection(){
 		if (stage !== 'idle') {
 			return
 		}
+		setProgress(0)
 		setStage('processing')
+
+		window.setTimeout(() => setProgress(100), 10)
 	}
 
 	const resetStage = () => {
 		setStage('idle')
+		setProgress(0)
 	}
 
 	return(
@@ -175,10 +180,10 @@ export default function ShowcaseSection(){
 								</div>
 
 								{stage === 'processing' ? (
-									<div className="absolute inset-0 w-full transition-opacity bg-white p-4 h-fit rounded-2xl duration-500 opacity-100">
-										<ProcessingCopy />
-										<div className="h-1.5 w-full overflow-hidden rounded-full bg-pale-blue">
-											<div className="h-full w-full rounded-full bg-primary transition-all duration-5200 ease-linear" />
+							<div className="absolute inset-0 top-1/2 w-full max-w-270 transition-opacity bg-white p-4 h-fit rounded-2xl duration-500 opacity-100 flex flex-col items-center justify-center gap-5">
+								<ProcessingCopy />
+								<div className="h-1.5 w-full max-w-87.5 overflow-hidden rounded-full bg-pale-blue">
+											<div className="h-full rounded-full bg-primary transition-all duration-5200 ease-linear" style={{ width: `${progress}%` }} />
 										</div>
 									</div>
 								) : null}

@@ -1,14 +1,32 @@
 'use client'
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Image from "next/image";
 import { useRef } from "react";
 import Button from "../Button";
+
+gsap.registerPlugin(ScrollToPlugin);
 export const BLUR_DATA_URL = `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABnAKkDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAECAwUE/8QAHBABAAIDAQEBAAAAAAAAAAAAABJhARMUAhED/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAECAwT/xAAWEQEBAQAAAAAAAAAAAAAAAAAAEQH/2gAMAwEAAhEDEQA/ANr4eMLYHjw8EemoYwnjCWPCePBAsYTxg8eE8eFgjjCXxLHlKLeYiHwvi2JRbxnVWcI5wuz5LPh1xjVOcI/F2fBQbxnVPwfFsBBUVfD+LICCaqGMHjCePJwZ1UPg+LIiCKr1nj83TrPW4RuufH5pY/Nfj80seCFU48JY8LseEseCLVOPCUFuPBwXMSqYCC+Ag3jOueBZ8OmBZ8N4zrmz4R1uqBQaRzaxrdEBBUc8BB0QEBVEDgvgIIqiAg6ICCKUDis+D45wqETin8BFpY8njykZCoxOJmRKjE4mbQhERTJrGUIiKYVFcRFP4FEIiKYFQiIpgVCIimEFX0fVGwbGIL/pyUbBsB0SElGwbAdEjk59h7AXyOTn2DYqOiQk59g2Ki+Qko2WNii+RSU7BsUXSElGwbAXyElGwtgrokJKNg2A4Nw3Wzuix0WyNLdY3Wzuix0WDS3WN1s7osb7RGlusbrZ2+z32o0N1nutnb7HRYjR3WN1s7osdFqNHdY3Wzuix0W0jQ3WN1s7osdFitHdZbrZ/RZdFrBo7rG62d0WOixWjusbmd0WOiwrI6bPptk9Fn0W5jV6bPotldFnj97Bq9Fn0Wyt9pY/exGp0WOi2Zvs99iNPosdFszfY320laXRY6LZm+xvtcK0+iy6bZm+y6LaiVqdNl02y99jotYtanTY6bZfQN9kK1Omx0Wy99jeRa1Oix0WzN9jfZCsyeTnkBxaPHvKWPeQAPHvKU8gCJY9ZOeQBkTyU8gNYgnkp5AaxEZ5KeQG8QTyU8gKCeTnkAUTyc8gCieRPIAP/9k=`
 
 export default function HeroSection(){
     const heroImage = useRef(null)
     const heroVideo = useRef<HTMLVideoElement>(null)
+
+    const scrollToCTASection = () => {
+        const target = document.getElementById("cta-section")
+        if (!target) return
+
+        gsap.to(window, {
+            duration: 0.9,
+            scrollTo: {
+                y: target,
+                offsetY: 80,
+                autoKill: false,
+            },
+            ease: "power3.inOut",
+        })
+    }
 
     useGSAP(() => {
         gsap.fromTo('.heroImage',{clipPath:'inset(25% 25% 25% 25%)'},{clipPath:'inset(0% 0% 0% 0%)',delay:1.5,duration:1,ease:'sine.inOut'})
@@ -24,7 +42,7 @@ export default function HeroSection(){
                 <div className="flex flex-col lg:flex-row w-full gap-2 lg:justify-between">
                     <p className="fade flex-1 text-white">Stop the revenue leakage. MediCipher is a comprehensive, AI-powered suite that optimizes reimbursement, automates medical documentation, and defends against audits—shifting your clinical team from data hunters to clinical validators.</p>
                     <div className="flex flex-1 lg:justify-end-safe">
-                        <Button className='fade' style={{backgroundColor:"#0A9D88"}}>Try FREE for 30 days</Button>
+                        <Button type="button" onClick={scrollToCTASection} className='fade' style={{backgroundColor:"#0A9D88"}}>Try FREE for 30 days</Button>
                     </div>
                 </div>
             </div>

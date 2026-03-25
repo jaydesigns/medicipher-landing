@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { Pluggable } from 'unified'
+import Button from './Button'
 
 const remarkPlugins: Pluggable[] = [remarkGfm as unknown as Pluggable]
 
@@ -135,28 +136,54 @@ export default function Question({ fixed = false, isClosing = false, onClose, is
 
     clearPlaybackTimeout()
 
-    if (isOpen) {
-      video.currentTime = 0
-      const playPromise = video.play()
-      if (playPromise) {
-        playPromise.catch((err) => {
-          console.error('Error playing video on open:', err)
-        })
-      }
-
+    const pauseAfterFourSeconds = () => {
+      clearPlaybackTimeout()
       playbackTimeoutRef.current = window.setTimeout(() => {
         if (!video.paused) {
           video.pause()
         }
-        video.currentTime = Math.min(video.duration, 4)
         playbackTimeoutRef.current = null
       }, 4000)
+    }
+
+    const playFrom = (start: number) => {
+      video.currentTime = start
+      const playPromise = video.play()
+      if (playPromise) {
+        playPromise.catch((err) => {
+          console.error('Error playing video:', err)
+        })
+      }
+      pauseAfterFourSeconds()
+    }
+
+    const playTimeline = () => {
+      if (isSubmitting) {
+        const startAt = Math.max(0, video.duration - 4)
+        playFrom(startAt)
+      } else if (isOpen) {
+        playFrom(0)
+      } else {
+        if (!video.paused) {
+          video.pause()
+        }
+      }
+    }
+
+    if (Number.isFinite(video.duration) && video.duration > 0) {
+      playTimeline()
+    } else {
+      const onLoadedMetadata = () => {
+        playTimeline()
+        video.removeEventListener('loadedmetadata', onLoadedMetadata)
+      }
+      video.addEventListener('loadedmetadata', onLoadedMetadata)
     }
 
     return () => {
       clearPlaybackTimeout()
     }
-  }, [isOpen])
+  }, [isOpen, isSubmitting])
 
   useGSAP(
     () => {
@@ -195,7 +222,7 @@ export default function Question({ fixed = false, isClosing = false, onClose, is
       <div className="mx-auto flex w-full max-w-270 gap-8 px-2 md:px-0">
         <div className="flex flex-col flex-1">
             <form onSubmit={handleSubmit} className='space-y-2'>
-              <label className='rounded-md border border-primary p-2 flex items-start gap-2'>
+              <label className='rounded-xl border border-primary p-2 flex items-start gap-2'>
                 <span className='material-symbols-outlined text-primary'>bubble_chart</span>
                 <textarea
                   ref={inputRef}
@@ -208,16 +235,16 @@ export default function Question({ fixed = false, isClosing = false, onClose, is
               </label>
 
               <div className='flex items-center gap-2'>
-                <button
+                <Button
                   type='submit'
                   disabled={isSubmitting}
-                  className='rounded-md bg-primary px-4 py-2 text-white disabled:opacity-50'
+                  className='disabled:opacity-50'
                 >
                   {isSubmitting ? 'Generating...' : 'Submit'}
-                </button>
+                </Button>
               </div>
 
-              <div className='rounded-md border border-slate-200 bg-white p-3 text-sm text-slate-700 min-h-[120px]'>
+              <div className='rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700 min-h-30'>
                 {error ? (
                   <p className='text-red-500'>{error}</p>
                 ) : aiResponse ? (

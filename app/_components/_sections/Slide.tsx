@@ -2,8 +2,11 @@
 
 import { useState, useRef } from "react";
 import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Button from "../Button";
 import Image from "next/image";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 interface SlideData {
 	image: string;
@@ -42,6 +45,21 @@ export default function SlideSection(){
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 	const titleRef = useRef<HTMLHeadingElement>(null);
 	const descriptionRef = useRef<HTMLParagraphElement>(null);
+
+	const scrollToCTASection = () => {
+		const target = document.getElementById("cta-section");
+		if (!target) return;
+
+		gsap.to(window, {
+			duration: 0.9,
+			scrollTo: {
+				y: target,
+				offsetY: 80,
+				autoKill: false,
+			},
+			ease: "power3.inOut",
+		});
+	};
 
 	const handleSlideChange = (index: number) => {
 		if (index === currentSlide) return;
@@ -131,10 +149,7 @@ export default function SlideSection(){
 						</p>
 					</div>
 					<div className="mt-6 flex flex-col gap-3 sm:flex-row">
-						<Button className="font-bold leading-[1.2] tracking-[-0.24px] text-foreground">
-							Schedule FREE Consultation
-						</Button>
-						<Button className="font-bold leading-[1.2] tracking-[-0.24px] text-foreground bg-secondary">
+						<Button type="button" onClick={scrollToCTASection} className="font-bold leading-[1.2] tracking-[-0.24px] text-foreground bg-secondary">
 							Schedule a Demo
 						</Button>
 					</div>

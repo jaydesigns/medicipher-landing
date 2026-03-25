@@ -90,7 +90,7 @@ export default function Navigation() {
   return (
     <nav
       ref={navRef}
-      className="navBar fade fixed w-full bottom-6 z-20 px-6"
+      className="navBar fade fixed w-full bottom-6 z-20 backdrop-blur-2xl mx-auto max-w-270 bg-white/75 border border-slate-200 shadow-[0_15px_35px_rgba(12,20,45,0.16)] text-navy rounded-[20px] transition-all duration-300 ease-out"
       aria-label="Main navigation"
     >
         <div className='w-full max-w-270 mx-auto'>
@@ -98,7 +98,7 @@ export default function Navigation() {
             <Question isOpen={isQuestionOpen} fixed={true} isClosing={isQuestionClosing} onClose={handleCloseQuestion} />
           )}
         </div>
-        <div className='mx-auto max-w-270 w-full p-1 bg-white/75 backdrop-blur-2xl border border-slate-200 shadow-[0_15px_35px_rgba(12,20,45,0.16)] text-navy rounded-[20px] transition-all duration-300 ease-out'>
+        <div className=' w-full'>
             <div className="flex items-center justify-between w-full px-4 py-2">
                 <Logomark color={'currentColor'} style={{ transform: 'scale(0.7) translateX(-20%)' }} />
                 <Button variant='outlined' onClick={handleToggleQuestion}><span className='text-xs font-bold text-nowrap'>Ask Medicipher AI</span></Button>

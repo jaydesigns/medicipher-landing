@@ -6,7 +6,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 export default function Button({ children, className = '', type, variant = 'default', ...props }: ButtonProps) {
-    const baseClasses = 'px-6 py-2 font-medium button-text rounded-full transition-all'
+    const baseClasses = 'px-6 py-2 font-medium button-text rounded-full transition-all max-h-10 flex items-center'
     const variantClasses =
         variant === 'outlined'
             ? 'bg-white text-accent border border-accent hover:bg-accent/10'

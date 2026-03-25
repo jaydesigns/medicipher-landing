@@ -25,6 +25,11 @@ export default function Features(){
                         <h6>Drastically Reduce Staff Turnover Costs</h6>
                         <span className="caption"><span className="text-white/50">{`AI automates assessment prepopulation, preventing the >$120,000 cost of replacing an MDS Coordinator.`}</span></span>
                     </FeatureCard>
+                    <FeatureCard additionalClass="scrollFade opacity-0 row-span-2 col-span-full md:col-start-5 md:row-start-1 md:col-span-2 bg-primary">
+                        <h3>15%</h3>
+                        <h6>Defend Against Aggressive Audits</h6>
+                        <span className="caption">{`Protect earned revenue by instantly building undeniable evidence trails to counter the national 15.1% improper payment rate.`}</span>
+                    </FeatureCard>
                     <FeatureCard additionalClass="scrollFade opacity-0 row-span-2 col-span-6 md:col-span-4 bg-cover bg-[url(https://res.cloudinary.com/df9xjyhfb/image/upload/v1770350247/pexels-marcus-aurelius-6787761_og4odb.jpg)]">
                         <div className="w-full md:w-1/3 p-2 rounded-2xl bg-pale-blue/10 backdrop-blur-md">
                             <div className="text-white">
@@ -33,11 +38,6 @@ export default function Features(){
                                 <span className="text-xs">{`Stop paying the "Point Solution Tax" with a unified suite that eliminates data silos and workflow friction.`}</span>
                             </div>
                         </div>
-                    </FeatureCard>
-                    <FeatureCard additionalClass="scrollFade opacity-0 row-span-2 col-span-full md:col-start-4 md:row-start-3 md:row-start-1 md:col-span-2 bg-primary">
-                        <h3>15%</h3>
-                        <h6>Defend Against Aggressive Audits</h6>
-                        <span className="caption">{`Protect earned revenue by instantly building undeniable evidence trails to counter the national 15.1% improper payment rate.`}</span>
                     </FeatureCard>
                 </div>
             </div>
